@@ -3,6 +3,7 @@ def count_words(text):
     counts={}
     for i in words:
         if i not in counts:
+
             counts[i]=1
         else:
             counts[i]+=1
