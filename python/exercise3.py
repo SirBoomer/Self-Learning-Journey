@@ -5,4 +5,5 @@ def analyse_file(filename):
     count=count_words(text)
     return count
 
-print(analyse_file("sample.txt"))
+if __name__ == "__main__":
+    print(analyse_file("sample.txt"))

@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+
+# generated output
+report.txt

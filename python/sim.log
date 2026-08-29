@@ -1,0 +1,9 @@
+# 0ns INFO: simulation started
+# 120ns INFO: reset released
+# 4820ns ERROR: [ASSERT_FAIL] fifo_full asserted while fifo empty
+# 5100ns WARNING: [TIMING] setup margin low on data_bus
+# 6740ns ERROR: [ASSERT_FAIL] fifo_full asserted while fifo empty
+# 8020ns ERROR: [X_PROP] unknown value on addr[3]
+# 9310ns WARNING: [TIMING] setup margin low on data_bus
+# 10400ns ERROR: [CHECKSUM] expected 0xDEAD got 0xBEEF
+# 11200ns INFO: simulation finished
