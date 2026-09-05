@@ -2,9 +2,12 @@ module seq_detect_tb;
     reg clk = 0;
     reg rst_n = 0;
     reg in = 0;
+    reg expected;
+    integer errors = 0;
     wire found;
     integer i;
     reg [11:0] stream = 12'b101101101100;
+    reg [3:0] history =4'b0000;
 
     seq_detect dut (.clk(clk), .rst_n(rst_n), .in(in), .found(found));
 
@@ -16,8 +19,18 @@ module seq_detect_tb;
             @(negedge clk);
             in = stream[i];
             @(posedge clk);
-            #1 $display("time=%0t in=%b state=%0d found=%b", $time, in, dut.state, found);
+            history={history[2:0], in};
+            #1;
+            expected = (history == 4'b1011);
+            if (found!== expected) begin 
+                $display("FAIL: time=%0t history=%b expected=%b got=%b", $time, history, expected, found);
+                errors = errors + 1;
+            end
         end
+        if (errors == 0)
+            $display("PASS: 12 bits checked, no errors");
+        else
+            $display("FAILED with %0d errors", errors);
         $finish;
     end
 endmodule
