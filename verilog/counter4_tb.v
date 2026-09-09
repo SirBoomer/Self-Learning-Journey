@@ -16,3 +16,4 @@ module counter4_tb;
         #30 $finish;
     end
 endmodule
+

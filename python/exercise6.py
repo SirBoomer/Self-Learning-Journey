@@ -5,6 +5,7 @@ with open("sim.log") as f:
     for line in f:
         match = re.search(r"(\d+)ns ERROR: \[(\w+)\]", line)
         if match:
+            
         
             
             if match.group(2) not in count:

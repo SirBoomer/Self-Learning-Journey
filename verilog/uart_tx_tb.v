@@ -25,7 +25,7 @@ module uart_tx_tb;
         end
     endtask
 
-        integer k;
+    integer k;
     integer errors = 0;
 
     initial begin
@@ -49,8 +49,36 @@ module uart_tx_tb;
             @(negedge clk);
         end
 
+        @(negedge clk);
+        data  = 8'hA5;
+        start = 1;
+        @(negedge clk);
+        start = 0;
+
+        fork
+            uart_receive(received);
+            begin
+                repeat (10) @(negedge clk);
+                data  = 8'h3c;
+                start = 1;
+                @(negedge clk);
+                start = 0;
+            end
+        join
+
+        if (received !== 8'hA5) begin
+            $display("FAIL: start-while-busy corrupted frame: expected a5 got %h", received);
+            errors = errors + 1;
+        end
+
+
+
+        wait (busy == 0);
+        @(negedge clk);
+
+
         if (errors == 0)
-            $display("PASS: all 256 byte values transmitted correctly");
+            $display("PASS: all 256 byte values transmitted correctly + start-while-busy, no errors");
         else
             $display("FAILED with %0d errors", errors);
 
