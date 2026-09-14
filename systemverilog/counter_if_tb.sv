@@ -11,12 +11,11 @@ module counter_if_tb;
         cif.en    = 0;
         #12 cif.rst_n = 1;
 
-        @(negedge clk);
-        cif.en =1;
+        @(cif.cb);
+        cif.cb.en <=1'b1;
 
-        repeat (5) @(posedge clk);
-        #1;
-        $display("count=%0d", cif.count);
+        repeat (5) @(cif.cb);
+        $display("count=%0d", cif.cb.count);
         $finish;
     end
 endmodule
