@@ -13,7 +13,7 @@ module counter_if_tb;
 
         @(cif.cb);
         cif.cb.en <=1'b1;
-
+        
         repeat (5) @(cif.cb);
         $display("count=%0d", cif.cb.count);
         $finish;
