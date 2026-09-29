@@ -16,10 +16,22 @@ module rand_test;
     initial begin
         p=new();
         repeat (5) begin
-            if (!p.randomize()) $fatal("randomize failed");
+            if (!p.randomize()) $fatal(1, "randomize failed");
             p.print();
         end
+        p.c_addr.constraint_mode(0);
+        repeat (5) begin
+            if (!p.randomize()) $fatal(1, "randomize failed");
+            p.print();
+        end    
+        p.addr.rand_mode(0);
+        p.addr= 8'h55;
+        repeat (5) begin
+            if (!p.randomize()) $fatal(1, "randomize failed");
+            p.print();
+        end    
     end
+
 
 endmodule
         
